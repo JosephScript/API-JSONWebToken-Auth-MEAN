@@ -1,0 +1,22 @@
+doctype html
+html(ng-app="myApp")
+    head
+        title= title
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js")
+        script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.min.js")
+        script(src="javascripts/app.js")
+        base(href="/")
+    body
+        nav(ng-controller="navCtrl")
+            ul
+                li(ng-hide="user.username")
+                    a(href='/login') login
+                li(ng-show='user.username')
+                    a(ng-click='logout()' href='#') logout
+                li(ng-show='user.username')
+                    a(href='/admin') admin
+                li(ng-show='user.username')
+                    p Hello {{user.username}}!
+
+    block content
