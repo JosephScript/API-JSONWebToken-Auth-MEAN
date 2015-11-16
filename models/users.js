@@ -87,7 +87,7 @@ UserSchema.statics.getAuthenticated = function (user, callback) {
 
                     // return the jwt
                     var token = jsonwebtoken.sign(user, 'supersecret', {
-                        expiresInMinutes: 1440 // expires in 24 hours
+                        expiresIn: 86400 // expires in 24 hours, expressed in seconds
                     });
                     return callback(null, token, user);
                 }
