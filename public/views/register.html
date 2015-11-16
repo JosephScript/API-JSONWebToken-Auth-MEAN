@@ -1,0 +1,22 @@
+<form ng-submit="submit()" name="myForm">
+    <label for="username">Username:</label>
+    <input type="text" name="username" ng-model="form.username" id="username"
+           ng-pattern="/^[a-zA-Z0-9_]*$/" placeholder="Username">
+    <!--<span class="error" ng-show="myForm.username.$error.required">This is required!</span>-->
+    <span class="error" ng-show="myForm.username.$error.pattern">Alphanumeric, underscores and periods only!</span>
+    <!--<span class="error" ng-show="myForm.username.$error.custom">You need username 'test'.</span>-->
+
+    <label for="firstName">First Name:</label>
+    <input type="text" name="firstName" ng-model="form.firstName" id="firstName" placeholder="First Name">
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" name="lastName" ng-model="form.lastName" id="lastName" placeholder="Last Name">
+
+    <label for="password">Password:</label>
+    <input type="password" name="password" ng-model="form.password" id="password" placeholder="Password">
+
+    <label for="confirm">Confirm Password:</label>
+    <input type="password" name="confirm" ng-model="form.confirm" id="confirm" placeholder="Confirm Password">
+
+    <input type="submit" value="Submit">
+</form>
