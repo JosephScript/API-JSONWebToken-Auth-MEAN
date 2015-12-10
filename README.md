@@ -68,9 +68,9 @@ mongoose.connection.on('disconnected', function () {
 Our users are then created in the `models/users.js` file. This is a pretty simple Mongoose schema...
 
 ```javascript
-var mongoose = require('mongoose')
-    , bcrypt = require('bcrypt')
-    , SALT_WORK_FACTOR = 10;
+var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
+var SALT_WORK_FACTOR = 10;
     
 var UserSchema = new mongoose.Schema({
     firstName: {type: String, required: true},
@@ -153,7 +153,7 @@ UserSchema.statics.getAuthenticated = function (user, callback) {
 
                     // return the jwt
                     var token = jsonwebtoken.sign(doc, 'supersecret', {
-                        expiresInMinutes: 1440 // expires in 24 hours
+                        expiresIn: 86400 // expires in 24 hours, expressed in seconds
                     });
                     return callback(null, token, doc);
                 }
