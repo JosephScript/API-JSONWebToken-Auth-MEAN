@@ -1,10 +1,9 @@
 <form ng-submit="submit()" name="myForm">
     <label for="username">Username:</label>
-    <input type="text" name="username" ng-model="form.username" id="username"
+    <input type="text" name="username" ng-model="form.username" id="username" required
            ng-pattern="/^[a-zA-Z0-9_]*$/" placeholder="Username">
-    <!--<span class="error" ng-show="myForm.username.$error.required">This is required!</span>-->
+    <span class="error" ng-show="myForm.username.$error.required">This is required!</span>
     <span class="error" ng-show="myForm.username.$error.pattern">Alphanumeric, underscores and periods only!</span>
-    <!--<span class="error" ng-show="myForm.username.$error.custom">You need username 'test'.</span>-->
 
     <label for="firstName">First Name:</label>
     <input type="text" name="firstName" ng-model="form.firstName" id="firstName" placeholder="First Name">

@@ -25,11 +25,12 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider',
   }]);
 
 
-app.controller('registerCtrl', ['$scope', '$http', function ($scope, $http) {
+app.controller('registerCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
   $scope.submit = function () {
     $http.post('api/register', $scope.form)
       .then(function (response) {
         console.log(response);
+        $location.path('/login')
       });
   }
 }]);
@@ -72,9 +73,9 @@ app.controller('navCtrl', ['authService', '$scope', '$location',
 
 app.service('authService', ['$window', '$q', function ($window, $q) {
 
-  var self = this,
-    defer = $q.defer(),
-    user = null;
+  var self = this;
+  var defer = $q.defer();
+  var user = null;
 
   // This exposes the user object as a promise.
   // First two arguments of then are success and error callbacks, third one is notify callback.
