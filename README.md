@@ -203,6 +203,6 @@ app.factory('authInterceptor', ['$q', '$location', 'authService', function ($q, 
     }]);
 }]);
 ```
-That's it! Once a user logs in, they can click the `test` button to prove that their restricted API is indeed pulling information in through an Angular $http call. 
+That's it! Once a user logs in, they can see the `admin` page to prove that their restricted API is indeed pulling information in through an Angular $http call. 
 
 
