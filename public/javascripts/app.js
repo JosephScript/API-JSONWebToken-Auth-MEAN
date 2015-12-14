@@ -57,36 +57,39 @@ app.controller('loginCtrl', ['$scope', '$http', 'authService', '$location',
 app.controller('navCtrl', ['authService', '$scope', '$location',
   function (authService, $scope, $location) {
 
-    if ($scope.user && $scope.user.username) {
-      $location.path('/admin');
-    }
+    $scope.user = authService.getUser();
+
+    authService.observeUser().then(null, null, function(user){
+      $scope.user  = user;
+    });
 
     $scope.logout = function () {
       authService.logout();
       $location.path('/');
     };
 
-    authService.getUser().then(null, null, function (user) {
-      $scope.user = user;
-    });
   }]);
 
 app.service('authService', ['$window', '$q', function ($window, $q) {
 
   var self = this;
+  this.user = {};
   var defer = $q.defer();
-  var user = null;
 
   // This exposes the user object as a promise.
   // First two arguments of then are success and error callbacks, third one is notify callback.
   this.getUser = function () {
     self.setUser();
+    return self.user;
+  };
+
+  this.observeUser = function() {
     return defer.promise;
   };
 
   this.setUser = function () {
-    user = self.parseJwt(self.getToken());
-    defer.notify(user);
+    self.user = self.parseJwt(self.getToken());
+    defer.notify(self.user);
   };
 
   this.parseJwt = function (token) {
@@ -111,6 +114,8 @@ app.service('authService', ['$window', '$q', function ($window, $q) {
     if (token) {
       var params = self.parseJwt(token);
       var notExpired = Math.round(new Date().getTime() / 1000) <= params.exp;
+
+      // if the user is expired, log them out
       if (!notExpired) {
         self.logout();
       }
